@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maxent Model for Pea Aphid</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #5C2E2E;
+        }
+        hr {
+            border: 1px solid #ccc;
+            margin: 30px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #5C2E2E;
+            color: white;
+        }
+        img {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+            height: auto;
+        }
+        img.large {
+            width: 90%;
+        }
+        img.large2 {
+            width: 50%;
+        }
+        a {
+            color: #006400;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .center {
+            text-align: center;
+        }
+        .thumbnail-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .thumbnail-container a {
+            margin: 10px;
+        }
+        .thumbnail-container img {
+            width: 250px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Maxent Model for Pea Aphid</h1>
+    <p class="center">This page contains some analysis of the Maxent model for pea_aphid, using Maxent version 3.4.4.</p>
+    <hr>
+
+    <h2>Analysis of Omission/Commission</h2>
+    <p>The following picture shows the omission rate and predicted area as a function of the cumulative threshold. The omission rate is calculated both on the training presence records, and (if test data are used) on the test records. The omission rate should be close to the predicted omission, because of the definition of the cumulative threshold.</p>
+    <img src="plots/pea_aphid_omission.png" alt="Omission Rate Graph" class="large2">
+
+    <p>The next picture is the receiver operating characteristic (ROC) curve for the same data. Note that the specificity is defined using predicted area, rather than true commission. This implies that the maximum achievable AUC is less than 1. If test data is drawn from the Maxent distribution itself, then the maximum possible test AUC would be 0.929 rather than 1; in practice the test AUC may exceed this bound.</p>
+    <img src="plots/pea_aphid_roc.png" alt="ROC Curve" class="large2">
+
+    <h2>Thresholds and Omission Rates</h2>
+    <p>Some common thresholds and corresponding omission rates are as follows. These are 1-sided p-values for the null hypothesis that test points are predicted no better than by a random prediction with the same fractional predicted area.</p>
+
+    <table>
+        <tr>
+            <th>Cumulative Threshold</th>
+            <th>Logistic Threshold</th>
+            <th>Description</th>
+            <th>Fractional Predicted Area</th>
+            <th>Training Omission Rate</th>
+        </tr>
+        <tr align="center">
+            <td>1.000</td><td>0.014</td><td>Fixed cumulative value 1</td><td>0.465</td><td>0.003</td>
+        </tr>
+        <tr align="center">
+            <td>5.000</td><td>0.069</td><td>Fixed cumulative value 5</td><td>0.269</td><td>0.023</td>
+        </tr>
+        <tr align="center">
+            <td>10.000</td><td>0.131</td><td>Fixed cumulative value 10</td><td>0.189</td><td>0.061</td>
+        </tr>
+        <tr align="center">
+            <td>0.025</td><td>0.001</td><td>Minimum training presence</td><td>0.814</td><td>0.000</td>
+        </tr>
+        <tr align="center">
+            <td>13.867</td><td>0.179</td><td>10 percentile training presence</td><td>0.152</td><td>0.098</td>
+        </tr>
+        <tr align="center">
+            <td>17.614</td><td>0.223</td><td>Equal training sensitivity and specificity</td><td>0.127</td><td>0.127</td>
+        </tr>
+        <tr align="center">
+            <td>9.785</td><td>0.128</td><td>Maximum training sensitivity plus specificity</td><td>0.191</td><td>0.049</td>
+        </tr>
+        <tr align="center">
+            <td>3.190</td><td>0.043</td><td>Balance training omission, predicted area and threshold value</td><td>0.322</td><td>0.009</td>
+        </tr>
+        <tr align="center">
+            <td>11.726</td><td>0.152</td><td>Equate entropy of thresholded and original distributions</td><td>0.171</td><td>0.078</td>
+        </tr>
+    </table>
+    
+    <hr>
+
+    <h2>Pictures of the Model</h2>
+    <p>This is a representation of the Maxent model for pea_aphid. Warmer colors show areas with better predicted conditions. White dots show the presence locations used for training, while violet dots show test locations.</p>
+    <a href="plots/pea_aphid.png"><img src="plots/pea_aphid.png" alt="Maxent Model Map" class="large"></a>
+
+    <hr>
+
+    <h2>Response Curves</h2>
+    <p>These curves show how each environmental variable affects the Maxent prediction. The curves show the marginal effect of changing exactly one variable, whereas the model may take advantage of sets of variables changing together.</p>
+
+    <div class="thumbnail-container">
+        <a href="plots/pea_aphid_bio14.png"><img src="plots/pea_aphid_bio14_thumb.png" class="thumbnail" alt="Bio14 Response Curve"></a>
+        <a href="plots/pea_aphid_bio2.png"><img src="plots/pea_aphid_bio2_thumb.png" class="thumbnail" alt="Bio2 Response Curve"></a>
+        <a href="plots/pea_aphid_bio3.png"><img src="plots/pea_aphid_bio3_thumb.png" class="thumbnail" alt="Bio3 Response Curve"></a>
+        <a href="plots/pea_aphid_bio8.png"><img src="plots/pea_aphid_bio8_thumb.png" class="thumbnail" alt="Bio8 Response Curve"></a>
+        <a href="plots/pea_aphid_bio9.png"><img src="plots/pea_aphid_bio9_thumb.png" class="thumbnail" alt="Bio9 Response Curve"></a>
+        <a href="plots/pea_aphid_cd.png"><img src="plots/pea_aphid_cd_thumb.png" class="thumbnail" alt="CD Response Curve"></a>
+        <a href="plots/pea_aphid_elevation.png"><img src="plots/pea_aphid_elevation_thumb.png" class="thumbnail" alt="Elevation Response Curve"></a>
+        <a href="plots/pea_aphid_hii.png"><img src="plots/pea_aphid_hii_thumb.png" class="thumbnail" alt="HII Response Curve"></a>
+        <a href="plots/pea_aphid_humidity.png"><img src="plots/pea_aphid_humidity_thumb.png" class="thumbnail" alt="Humidity Response Curve"></a>
+        <a href="plots/pea_aphid_lulc.png"><img src="plots/pea_aphid_lulc_thumb.png" class="thumbnail" alt="LULC Response Curve"></a>
+        <a href="plots/pea_aphid_solar_radiation.png"><img src="plots/pea_aphid_solar_radiation_thumb.png" class="thumbnail" alt="Solar Radiation Response Curve"></a>
+        <a href="plots/pea_aphid_wind_speed.png"><img src="plots/pea_aphid_wind_speed_thumb.png" class="thumbnail" alt="Wind Speed Response Curve"></a>
+    </div>
+
+    <hr>
+
+    <h2>Analysis of Variable Contributions</h2>
+    <p>The following table gives estimates of relative contributions of the environmental variables to the Maxent model. To determine the percent contribution, each step of the Maxent algorithm is to increase the gain of the model by modifying one variable. The values shown in the table are heuristic estimates of relative contribution, which may not reflect true importance due to correlations.</p>
+
+    <table>
+        <tr>
+            <th>Variable</th>
+            <th>Percent Contribution</th>
+            <th>Permutation Importance</th>
+        </tr>
+        <tr align="center">
+            <td>hii</td><td>50.4%</td><td>37.1</td>
+        </tr>
+        <tr align="center">
+            <td>cd</td><td>1%</td><td>0.2</td>
+        </tr>
+        <tr align="center">
+            <td>bio3</td><td>0.8%</td><td>3.9</td>
+        </tr>
+        <tr align="center">
+            <td>bio8</td><td>3%</td><td>9.5</td>
+        </tr>
+        <tr align="center">
+            <td>bio14</td><td>19%</td><td>4</td>
+        </tr>
+        <tr align="center">
+            <td>bio9</td><td>3.7%</td><td>1.6%</td>
+        </tr>
+        <tr align="center">
+            <td>wind_speed</td><td>0.8%</td><td>11.3</td>
+        </tr>
+        <tr align="center">
+            <td>bio2</td><td>0.4%</td><td>0.4</td>
+        </tr>
+        <tr align="center">
+            <td>elevation</td><td>3%</td><td>2.7</td>
+        </tr>
+        <tr align="center">
+            <td>humidity</td><td>15.2%</td><td>21.7</td>
+        </tr>
+        <tr align="center">
+            <td>solar_radiation</td><td>1.2%</td><td>3.1</td>
+        </tr>
+        <tr align="center">
+            <td>lulc</td><td>0.8%</td><td>3.9</td>
+        </tr>
+    </table>
+
+    <hr>
+
+    <h2>Jackknife Test of Variable Importance</h2>
+    <p>The environmental variable with highest gain when used in isolation is <strong>hii</strong>, which therefore appears to have the most useful information by itself. The environmental variable that decreases the gain the most when omitted is also <strong>hii</strong>, which therefore appears to have the most information not present in the other variables.</p>
+    <img src="plots/pea_aphid_jacknife.png" alt="Jackknife" class="large2">
+
+</body>
+</html>
