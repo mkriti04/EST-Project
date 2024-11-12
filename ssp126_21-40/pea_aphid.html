@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Replicated Maxent Model for Pea Aphid</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #8B4513; /* Brown shade for headings */
+        }
+        hr {
+            border: 1px solid #ccc;
+            margin: 20px 0;
+        }
+        img {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+            height: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #D2B48C; /* Brown shade for the first row */
+            color: #4B2E2E; /* Darker text for contrast */
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .thumbnail-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .thumbnail-container img {
+            width: 150px;
+            height: auto;
+            border: 1px solid #ddd;
+            padding: 5px;
+        }
+        .thumbnail-container a {
+            display: inline-block;
+        }
+    </style>
+    
+</head>
+<body>
+    <h1>Replicated Maxent Model for Pea Aphid</h1>
+    <p>This page summarizes the results of 10 bootstrap models for pea_aphid, created using Maxent version 3.4.4.
+    </p>
+
+    <hr>
+
+    <h2>Analysis of Omission/Commission</h2>
+    <p>The following picture shows the training omission rate and predicted area as a function of the cumulative threshold, averaged over the replicate runs.</p>
+    <img src="plots/pea_aphid_omission.png" alt="Omission/Commission Analysis">
+
+    <p>The next picture is the receiver operating characteristic (ROC) curve for the same data, again averaged over the replicate runs. The average training AUC for the replicate runs is 0.931, and the standard deviation is 0.005.</p>
+    <img src="plots/pea_aphid_roc.png" alt="ROC Curve">
+
+    <hr>
+
+    <h2>Pictures of the Model</h2>
+    <p>The following two pictures show the point-wise mean and standard deviation of the 10 output grids. Other available summary grids are 
+        <a href="plots/pea_aphid_min.png">min</a>, 
+        <a href="plots/pea_aphid_max.png">max</a>, and 
+        <a href="plots/pea_aphid_median.png">median</a>.
+    </p>
+    <img src="plots/pea_aphid_avg.png" alt="Point-wise Mean of 10 Output Grids" width="600">
+    <img src="plots/pea_aphid_stddev.png" alt="Standard Deviation of 10 Output Grids" width="600">
+
+    <p>The following two pictures show the point-wise mean and standard deviation of the 10 models applied to the environmental layers in ssp126_2021_40. Other available summary grids are 
+        <a href="plots/pea_aphid_ssp126_2021_40_min.png">min</a>, 
+        <a href="plots/pea_aphid_ssp126_2021_40_max.png">max</a>, and 
+        <a href="plots/pea_aphid_ssp126_2021_40_median.png">median</a>.
+    </p>
+    <img src="plots/pea_aphid_ssp126_2021_40_avg.png" alt="Mean Applied to Environmental Layers" width="600">
+    <img src="plots/pea_aphid_ssp126_2021_40_stddev.png" alt="Standard Deviation Applied to Environmental Layers" width="600">
+
+    <hr>
+
+    <h2>Response Curves</h2>
+    <p>These curves show how each environmental variable affects the Maxent prediction. The curves show the mean response of the 10 replicate Maxent runs (red) and the mean ± one standard deviation (blue).</p>
+    <div class="thumbnail-container">
+        <a href="plots/pea_aphid_bio14.png"><img src="plots/pea_aphid_bio14_thumb.png" alt="Response Curve for bio14"></a>
+        <a href="plots/pea_aphid_bio2.png"><img src="plots/pea_aphid_bio2_thumb.png" alt="Response Curve for bio2"></a>
+        <a href="plots/pea_aphid_bio3.png"><img src="plots/pea_aphid_bio3_thumb.png" alt="Response Curve for bio3"></a>
+        <a href="plots/pea_aphid_bio8.png"><img src="plots/pea_aphid_bio8_thumb.png" alt="Response Curve for bio8"></a>
+        <a href="plots/pea_aphid_bio9.png"><img src="plots/pea_aphid_bio9_thumb.png" alt="Response Curve for bio9"></a>
+    </div>
+
+    <p>Each of the following curves represents a Maxent model created using only the corresponding variable:</p>
+    <div class="thumbnail-container">
+        <a href="plots/pea_aphid_bio14_only.png"><img src="plots/pea_aphid_bio14_only_thumb.png" alt="Only bio14 Model"></a>
+        <a href="plots/pea_aphid_bio2_only.png"><img src="plots/pea_aphid_bio2_only_thumb.png" alt="Only bio2 Model"></a>
+        <a href="plots/pea_aphid_bio3_only.png"><img src="plots/pea_aphid_bio3_only_thumb.png" alt="Only bio3 Model"></a>
+        <a href="plots/pea_aphid_bio8_only.png"><img src="plots/pea_aphid_bio8_only_thumb.png" alt="Only bio8 Model"></a>
+        <a href="plots/pea_aphid_bio9_only.png"><img src="plots/pea_aphid_bio9_only_thumb.png" alt="Only bio9 Model"></a>
+    </div>
+
+    <hr>
+
+    <h2>Analysis of Variable Contributions</h2>
+    <p>The following table provides estimates of variable contributions and permutation importance:</p>
+    <table>
+        <tr>
+            <th>Variable</th>
+            <th>Percent Contribution</th>
+            <th>Permutation Importance</th>
+        </tr>
+        <tr align="right">
+            <td>bio9</td>
+            <td>55.6%</td>
+            <td>24.4%</td>
+        </tr>
+        <tr align="right">
+            <td>bio8</td>
+            <td>24.6%</td>
+            <td>47.2%</td>
+        </tr>
+        <tr align="right">
+            <td>bio14</td>
+            <td>11.0%</td>
+            <td>10.3%</td>
+        </tr>
+        <tr align="right">
+            <td>bio3</td>
+            <td>4.6%</td>
+            <td>12.9%</td>
+        </tr>
+        <tr align="right">
+            <td>bio2</td>
+            <td>4.2%</td>
+            <td>5.2%</td>
+        </tr>
+    </table>
+</body>
+</html>

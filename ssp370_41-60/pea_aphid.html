@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Replicated maxent model for pea_aphid</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #8B4513; /* Brown shade for headings */
+        }
+        hr {
+            border: 1px solid #ccc;
+            margin: 20px 0;
+        }
+        img {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+            height: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #D2B48C; /* Brown shade for the first row */
+            color: #4B2E2E; /* Darker text for contrast */
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .thumbnail-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .thumbnail-container img {
+            width: 150px;
+            height: auto;
+            border: 1px solid #ddd;
+            padding: 5px;
+        }
+        .thumbnail-container a {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <CENTER><H1>Replicated maxent model for pea_aphid</H1></CENTER>
+    <br> 
+    This page summarizes the results of 10 bootstrap models for pea_aphid, created using Maxent version 3.4.4.  
+    <br><br>
+
+    <HR>
+    <H2>Analysis of omission/commission</H2>
+    The following picture shows the training omission rate and predicted area as a function of the cumulative threshold, averaged over the replicate runs.
+    <br><img src="plots/pea_aphid_omission.png"><br><br>
+
+    The next picture is the receiver operating characteristic (ROC) curve for the same data, again averaged over the replicate runs.  
+    Note that the specificity is defined using predicted area, rather than true commission (see the paper by Phillips, Anderson and Schapire cited on the help page for discussion of what this means).  
+    The average training AUC for the replicate runs is 0.927, and the standard deviation is 0.004.
+    <br><img src="plots/pea_aphid_roc.png"><br><br>
+
+    <HR>
+    <H2>Pictures of the model</H2>
+    The following two pictures show the point-wise mean and standard deviation of the 10 output grids.  
+    Other available summary grids are <a href="plots/pea_aphid_min.png">min</a>, 
+    <a href="plots/pea_aphid_max.png">max</a> and 
+    <a href="plots/pea_aphid_median.png">median</a>.<br><br>
+    <a href="plots/pea_aphid_avg.png"> <img src="plots/pea_aphid_avg.png" width="600"></a>
+    <a href="plots/pea_aphid_stddev.png"> <img src="plots/pea_aphid_stddev.png" width="600"></a>
+    <br><br>
+    The following two pictures show the point-wise mean and standard deviation of the 10 models applied to the environmental layers in ssp370_2041_60.  
+    Other available summary grids are <a href="plots/pea_aphid_ssp370_2041_60_min.png">min</a>, 
+    <a href="plots/pea_aphid_ssp370_2041_60_max.png">max</a> and 
+    <a href="plots/pea_aphid_ssp370_2041_60_median.png">median</a>.<br><br>
+    <a href="plots/pea_aphid_ssp370_2041_60_avg.png"> <img src="plots/pea_aphid_ssp370_2041_60_avg.png" width="600"></a>
+    <a href="plots/pea_aphid_ssp370_2041_60_stddev.png"> <img src="plots/pea_aphid_ssp370_2041_60_stddev.png" width="600"></a>
+    <br><br>
+
+    <HR>
+    <H2>Response curves</H2>
+    These curves show how each environmental variable affects the Maxent prediction.  
+    The curves show how the predicted probability of presence changes as each environmental variable is varied, keeping all other environmental variables at their average sample value.  
+    Click on a response curve to see a larger version.  
+    Note that the curves can be hard to interpret if you have strongly correlated variables, as the model may depend on the correlations in ways that are not evident in the curves.  
+    In other words, the curves show the marginal effect of changing exactly one variable, whereas the model may take advantage of sets of variables changing together.  
+    The curves show the mean response of the 10 replicate Maxent runs (red) and the mean +/- one standard deviation (blue, two shades for categorical variables).<br><br>
+    <div class="thumbnail-container">
+    <a href="plots/pea_aphid_bio14.png"> <img src="plots/pea_aphid_bio14_thumb.png"></a>
+    <a href="plots/pea_aphid_bio2.png"> <img src="plots/pea_aphid_bio2_thumb.png"></a>
+    <a href="plots/pea_aphid_bio3.png"> <img src="plots/pea_aphid_bio3_thumb.png"></a>
+    <a href="plots/pea_aphid_bio8.png"> <img src="plots/pea_aphid_bio8_thumb.png"></a>
+    <a href="plots/pea_aphid_bio9.png"> <img src="plots/pea_aphid_bio9_thumb.png"></a>
+</div>
+    <br><br>
+
+    In contrast to the above marginal response curves, each of the following curves represents a different model, namely, a Maxent model created using only the corresponding variable.  
+    These plots reflect the dependence of predicted suitability both on the selected variable and on dependencies induced by correlations between the selected variable and other variables.  
+    They may be easier to interpret if there are strong correlations between variables.<br><br>
+    <div class="thumbnail-container">
+    <a href="plots/pea_aphid_bio14_only.png"> <img src="plots/pea_aphid_bio14_only_thumb.png"></a>
+    <a href="plots/pea_aphid_bio2_only.png"> <img src="plots/pea_aphid_bio2_only_thumb.png"></a>
+    <a href="plots/pea_aphid_bio3_only.png"> <img src="plots/pea_aphid_bio3_only_thumb.png"></a>
+    <a href="plots/pea_aphid_bio8_only.png"> <img src="plots/pea_aphid_bio8_only_thumb.png"></a>
+    <a href="plots/pea_aphid_bio9_only.png"> <img src="plots/pea_aphid_bio9_only_thumb.png"></a>
+    </div>
+    <br><HR>
+    <H2>Analysis of variable contributions</H2><br>
+    The following table gives estimates of relative contributions of the environmental variables to the Maxent model.  
+    To determine the first estimate, in each iteration of the training algorithm, the increase in regularized gain is added to the contribution of the corresponding variable, or subtracted from it if the change to the absolute value of lambda is negative.  
+    For the second estimate, for each environmental variable in turn, the values of that variable on training presence and background data are randomly permuted.  
+    The model is reevaluated on the permuted data, and the reduction in training AUC is computed.  
+    The third estimate is the same as the second, but with the AUC averaged over all the test data.<br><br>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Variable</th>
+                <th>Contribution (%)</th>
+                <th>Permutation importance</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>bio9</td>
+                <td>59.8%</td>
+                <td>26.5%</td>
+            </tr>
+            <tr>
+                <td>bio8</td>
+                <td>21.1%</td>
+                <td>41.9%</td>
+            </tr>
+            <tr>
+                <td>bio14</td>
+                <td>10.5%</td>
+                <td>9.8%</td>
+            </tr>
+            <tr>
+                <td>bio3</td>
+                <td>5.2%</td>
+                <td>14.6%</td>
+            </tr>
+            <tr>
+                <td>bio2</td>
+                <td>3.5%</td>
+                <td>7.2%</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
